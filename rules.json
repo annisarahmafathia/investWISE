@@ -1,0 +1,525 @@
+{
+  "metadata": {
+    "domain": "Alokasi aset investasi investor pemula",
+    "version": "1.0",
+    "note": "Ambang kategori dan angka alokasi adalah parameter heuristik yang dapat diubah."
+  },
+  "questions": [
+    {
+      "id": "usia",
+      "label": "Berapa usia Anda?",
+      "type": "number",
+      "min": 17,
+      "max": 80,
+      "why": "Usia menentukan lamanya waktu yang Anda miliki untuk memulihkan nilai investasi bila pasar turun."
+    },
+    {
+      "id": "pendapatan",
+      "label": "Berapa pendapatan bulanan Anda (Rp)?",
+      "type": "number",
+      "min": 0,
+      "why": "Pendapatan menentukan seberapa besar likuiditas yang perlu dijaga dan kemampuan menanggung kerugian."
+    },
+    {
+      "id": "tujuan",
+      "label": "Apa jangka waktu tujuan finansial Anda?",
+      "type": "choice",
+      "options": {
+        "jangka_pendek": "Jangka pendek (< 3 tahun)",
+        "jangka_menengah": "Jangka menengah (3-5 tahun)",
+        "jangka_panjang": "Jangka panjang (> 5 tahun)"
+      },
+      "why": "Semakin pendek jangka waktu, semakin kecil porsi instrumen berfluktuasi tinggi yang aman."
+    },
+    {
+      "id": "profil_user",
+      "label": "Menurut Anda, profil risiko Anda?",
+      "type": "choice",
+      "options": {
+        "konservatif": "Konservatif",
+        "moderat": "Moderat",
+        "agresif": "Agresif"
+      },
+      "has_cf": true,
+      "why": "Persepsi Anda terhadap risiko menjadi salah satu bukti awal, lalu diuji silang dengan pertanyaan perilaku."
+    },
+    {
+      "id": "reaksi_turun",
+      "label": "Jika nilai investasi Anda turun 20%, apa yang Anda lakukan?",
+      "type": "choice",
+      "options": {
+        "jual_semua": "Menjual semuanya",
+        "tunggu": "Menunggu sampai pulih",
+        "beli_lagi": "Membeli lebih banyak"
+      },
+      "has_cf": true,
+      "why": "Reaksi terhadap kerugian adalah indikator toleransi risiko yang lebih jujur daripada profil yang dipilih sendiri."
+    },
+    {
+      "id": "pengalaman",
+      "label": "Bagaimana pengalaman investasi Anda?",
+      "type": "choice",
+      "options": {
+        "belum_ada": "Belum pernah",
+        "pernah": "Pernah sedikit",
+        "berpengalaman": "Sudah berpengalaman"
+      },
+      "has_cf": true,
+      "why": "Pengalaman memengaruhi kesiapan menghadapi fluktuasi harga."
+    },
+    {
+      "id": "dana_darurat",
+      "label": "Apakah Anda sudah punya dana darurat?",
+      "type": "choice",
+      "options": {
+        "ada": "Sudah ada",
+        "belum": "Belum ada"
+      },
+      "why": "Tanpa dana darurat, Anda berisiko menjual investasi saat harga sedang rendah untuk kebutuhan mendesak."
+    }
+  ],
+  "templates": {
+    "konservatif": {
+      "reksa_dana": 40,
+      "obligasi": 35,
+      "emas": 20,
+      "saham": 5
+    },
+    "moderat": {
+      "reksa_dana": 20,
+      "obligasi": 30,
+      "emas": 20,
+      "saham": 30
+    },
+    "agresif": {
+      "reksa_dana": 10,
+      "obligasi": 15,
+      "emas": 15,
+      "saham": 60
+    }
+  },
+  "profile_info": {
+    "konservatif": "Mengutamakan keamanan modal dengan fluktuasi sekecil mungkin.",
+    "moderat": "Menyeimbangkan pertumbuhan dan stabilitas.",
+    "agresif": "Mengejar pertumbuhan jangka panjang dan siap menerima fluktuasi tinggi."
+  },
+  "rules": [
+    {
+      "id": "D1",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "usia",
+          "op": "<=",
+          "value": 30
+        }
+      ],
+      "then": {
+        "fact": "kategori_usia",
+        "value": "muda"
+      },
+      "source": "Kategorisasi parameter sistem",
+      "description": "Usia sampai 30 tahun = muda"
+    },
+    {
+      "id": "D2",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "usia",
+          "op": ">=",
+          "value": 31
+        },
+        {
+          "fact": "usia",
+          "op": "<=",
+          "value": 49
+        }
+      ],
+      "then": {
+        "fact": "kategori_usia",
+        "value": "produktif"
+      },
+      "source": "Kategorisasi parameter sistem",
+      "description": "Usia 31-49 tahun = produktif"
+    },
+    {
+      "id": "D3",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "usia",
+          "op": ">=",
+          "value": 50
+        }
+      ],
+      "then": {
+        "fact": "kategori_usia",
+        "value": "senior"
+      },
+      "source": "Kategorisasi parameter sistem",
+      "description": "Usia 50 tahun ke atas = senior"
+    },
+    {
+      "id": "D4",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "pendapatan",
+          "op": "<",
+          "value": 3000000
+        }
+      ],
+      "then": {
+        "fact": "kategori_pendapatan",
+        "value": "rendah"
+      },
+      "source": "Kategorisasi parameter sistem",
+      "description": "Pendapatan < Rp3 juta/bulan = rendah"
+    },
+    {
+      "id": "D5",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "pendapatan",
+          "op": ">=",
+          "value": 3000000
+        },
+        {
+          "fact": "pendapatan",
+          "op": "<=",
+          "value": 10000000
+        }
+      ],
+      "then": {
+        "fact": "kategori_pendapatan",
+        "value": "menengah"
+      },
+      "source": "Kategorisasi parameter sistem",
+      "description": "Pendapatan Rp3-10 juta/bulan = menengah"
+    },
+    {
+      "id": "D6",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "pendapatan",
+          "op": ">",
+          "value": 10000000
+        }
+      ],
+      "then": {
+        "fact": "kategori_pendapatan",
+        "value": "tinggi"
+      },
+      "source": "Kategorisasi parameter sistem",
+      "description": "Pendapatan > Rp10 juta/bulan = tinggi"
+    },
+    {
+      "id": "R1",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "reaksi_turun",
+          "op": "==",
+          "value": "jual_semua"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.8,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Menjual semua saat nilai turun 20% menandakan toleransi risiko rendah"
+    },
+    {
+      "id": "R2",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "reaksi_turun",
+          "op": "==",
+          "value": "tunggu"
+        }
+      ],
+      "then": {
+        "hypothesis": "moderat"
+      },
+      "cf": 0.7,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Menunggu saat nilai turun menandakan toleransi risiko sedang"
+    },
+    {
+      "id": "R3",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "reaksi_turun",
+          "op": "==",
+          "value": "beli_lagi"
+        }
+      ],
+      "then": {
+        "hypothesis": "agresif"
+      },
+      "cf": 0.8,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Membeli lagi saat turun menandakan toleransi risiko tinggi"
+    },
+    {
+      "id": "R4",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "pengalaman",
+          "op": "==",
+          "value": "belum_ada"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.4,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Belum berpengalaman cenderung lebih aman dimulai konservatif"
+    },
+    {
+      "id": "R5",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "pengalaman",
+          "op": "==",
+          "value": "berpengalaman"
+        }
+      ],
+      "then": {
+        "hypothesis": "agresif"
+      },
+      "cf": 0.5,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Berpengalaman lebih siap menerima fluktuasi"
+    },
+    {
+      "id": "R6",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "dana_darurat",
+          "op": "==",
+          "value": "belum"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.6,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Tanpa dana darurat, risiko harus ditekan"
+    },
+    {
+      "id": "R7a",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "profil_user",
+          "op": "==",
+          "value": "konservatif"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.6,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Profil risiko pilihan pengguna: konservatif"
+    },
+    {
+      "id": "R7b",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "profil_user",
+          "op": "==",
+          "value": "moderat"
+        }
+      ],
+      "then": {
+        "hypothesis": "moderat"
+      },
+      "cf": 0.6,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Profil risiko pilihan pengguna: moderat"
+    },
+    {
+      "id": "R7c",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "profil_user",
+          "op": "==",
+          "value": "agresif"
+        }
+      ],
+      "then": {
+        "hypothesis": "agresif"
+      },
+      "cf": 0.6,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Profil risiko pilihan pengguna: agresif"
+    },
+    {
+      "id": "R8",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "kategori_usia",
+          "op": "==",
+          "value": "senior"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.5,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Usia senior punya waktu pemulihan lebih pendek"
+    },
+    {
+      "id": "R9",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "tujuan",
+          "op": "==",
+          "value": "jangka_pendek"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.6,
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Tujuan jangka pendek tidak cocok dengan risiko tinggi"
+    },
+    {
+      "id": "R10",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "tujuan",
+          "op": "==",
+          "value": "jangka_pendek"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -15,
+          "reksa_dana": 15
+        }
+      },
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Horizon pendek: kurangi saham, perbesar instrumen likuid"
+    },
+    {
+      "id": "R11",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "tujuan",
+          "op": "==",
+          "value": "jangka_panjang"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": 10,
+          "reksa_dana": -10
+        }
+      },
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Horizon panjang: fluktuasi saham sempat pulih"
+    },
+    {
+      "id": "R12",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "kategori_usia",
+          "op": "==",
+          "value": "muda"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": 5,
+          "obligasi": -5
+        }
+      },
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Usia muda: waktu investasi panjang"
+    },
+    {
+      "id": "R13",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "kategori_usia",
+          "op": "==",
+          "value": "senior"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -10,
+          "obligasi": 10
+        }
+      },
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Usia senior: prioritaskan stabilitas"
+    },
+    {
+      "id": "R14",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "kategori_pendapatan",
+          "op": "==",
+          "value": "rendah"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -5,
+          "reksa_dana": 5
+        }
+      },
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Pendapatan rendah: jaga likuiditas"
+    },
+    {
+      "id": "R15",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "dana_darurat",
+          "op": "==",
+          "value": "belum"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -10,
+          "reksa_dana": 10
+        }
+      },
+      "source": "Heuristik pakar (lengkapi dengan referensi OJK/literatur)",
+      "description": "Belum punya dana darurat: perbesar instrumen likuid",
+      "warning": "Siapkan dana darurat (sekitar 3-6 bulan pengeluaran) sebelum mulai berinvestasi."
+    }
+  ],
+  "min_allocation": {
+    "reksa_dana": 5
+  }
+}
