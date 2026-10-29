@@ -1,0 +1,169 @@
+# 💼 InvestWise AI: Sistem Pakar Rekomendasi Alokasi Aset Investasi bagi Investor Pemula
+
+> **Mata Kuliah:** Praktikum Kecerdasan Buatan (AI) / Ujian Tengah Semester (UTS)  
+> **Topik 4:** Sistem Pakar untuk Rekomendasi Alokasi Aset Investasi bagi Investor Pemula  
+> **Domain:** Keuangan / Manajemen Portofolio Investasi  
+> **Metode:** *Forward Chaining (Data-Driven)* & *Certainty Factor (Shortliffe & Buchanan)*
+
+---
+
+## 📌 1. Deskripsi Proyek
+**InvestWise AI** adalah aplikasi sistem pakar (*Expert System*) berbasis web yang dirancang untuk membantu investor pemula dalam menentukan profil risiko (*risk profile*) dan menyusun strategi diversifikasi alokasi aset portofolio yang aman, terukur, dan optimal.
+
+Sistem menganalisis parameter personal pengguna:
+- **Karakteristik Finansial:** Usia, pendapatan bulanan, dan ketersediaan dana darurat.
+- **Tujuan Investasi:** Jangka pendek (< 3 tahun), menengah (3 - 5 tahun), atau jangka panjang (> 5 tahun).
+- **Toleransi Psikologis & Pengalaman:** Reaksi terhadap koreksi pasar (*loss aversion*), pengalaman investasi, dan penilaian profil mandiri.
+
+Berdasarkan parameter tersebut, mesin inferensi (*Inference Engine*) melakukan penalaran maju (*Forward Chaining*) dengan menghitung tingkat kepastian (*Certainty Factor*) untuk merekomendasikan porsi alokasi ke 4 instrumen pasar modal:
+1. **Reksa Dana Pasar Uang / Pendapatan Tetap** (Likuiditas & Keamanan)
+2. **Obligasi / Surat Berharga Negara (SBN)** (Pendapatan Pasif Kupon Rutin)
+3. **Emas Logam Mulia** (*Safe Haven & Hedge* Inflasi)
+4. **Saham Indeks LQ45 / Bluechip** (Apresiasi Modal Jangka Panjang)
+
+---
+
+## 🏗️ 2. Arsitektur Sistem Pakar
+
+```
+                        +---------------------------+
+                        |   Pengguna (Investor)     |
+                        +-------------+-------------+
+                                      | Input Fakta & CF User
+                                      v
+       +-------------------------------------------------------------+
+       |                  USER INTERFACE (Streamlit)                 |
+       |  - Form Input & Validasi      - Chart Visualisasi Alokasi   |
+       |  - Fasilitas WHY & HOW        - Download PDF & CSV Report   |
+       |  - Katalog Ensiklopedia       - Kelola Rule (Admin)         |
+       +------------------------------+------------------------------+
+                                      |
+                                      v
+                        +---------------------------+
+                        |      WORKING MEMORY       |
+                        | - Fakta Awal User         |
+                        | - Fakta Turunan (Derive)  |
+                        | - Evidences & Trace Log   |
+                        +-------------+-------------+
+                                      ^
+                                      | Update & Retrieve
+                                      v
+       +-------------------------------------------------------------+
+       |                      INFERENCE ENGINE                       |
+       |  - Forward Chaining Cycle (Match -> Resolve -> Fire)        |
+       |  - Certainty Factor Combiner: CF(H,E) = CF(User) * CF(Rule) |
+       |  - CF Paralel: CF_comb = CF1 + CF2 * (1 - CF1)              |
+       |  - Liquidity Floor & Largest Remainder Normalization        |
+       +------------------------------+------------------------------+
+                                      ^
+                                      | Evaluasi Rule
+                                      v
+                        +---------------------------+
+                        |      KNOWLEDGE BASE       |
+                        | - 21+ IF-THEN Rules       |
+                        | - POJK, MPT, CFP Rules    |
+                        | - File data/rules.json    |
+                        +---------------------------+
+```
+
+---
+
+## 🌟 3. Fitur Utama & Kriteria Penilaian
+
+### A. Komponen Sistem Pakar (Bobot: 60%)
+1. **Knowledge Base (15%):** Representasi pengetahuan berbasis format terstruktur IF-THEN JSON (`derive`, `profile`, `adjust`) yang dilengkapi rujukan literatur valid (POJK No. 17 & 43, Modern Portfolio Theory Markowitz, Standard CFP).
+2. **Inference Engine (20%):** Forward Chaining data-driven dengan pencatatan alur penalaran lengkap (*trace*) dan daftar rule aktif (*fired rules*).
+3. **Working Memory (8%):** Penyimpanan dinamis OOP menggunakan `@dataclass Fact`, `Evidence`, dan class `WorkingMemory`.
+4. **User Interface (10%):** Web GUI interaktif berbasis Streamlit dengan visualisasi *donut chart*, breakdown nominal, dan badge status profil.
+5. **Explanation Facility (7%):**
+   - **WHY:** Menjelaskan alasan mengapa suatu pertanyaan diajukan.
+   - **HOW:** Menjelaskan alur pembuktian kesimpulan dan rule yang teraktivasi.
+
+### B. Fitur Tambahan (Bobot: 20%)
+6. **Certainty Factor (5%):** Kombinasi keyakinan serial $CF(H, E) = CF_{user} \times CF_{pakar}$ dan kombinasi paralel $CF_1 + CF_2(1 - CF_1)$.
+7. **Knowledge Acquisition (5%):** Antarmuka web bagi admin/pakar untuk melihat, menambah (*add*), mengedit (*update*), dan menghapus (*delete*) rules secara *real-time*.
+8. **Reporting & Logging (5%):** Ekspor hasil konsultasi ke dokumen PDF resmi (`fpdf2`), ekspor data CSV, riwayat konsultasi, dan analitik statistik sistem.
+9. **Fitur Pencarian & Filter (5%):** Pencarian instrumen investasi, filter riwayat pemodal, dan ensiklopedia pasar modal lengkap.
+
+---
+
+## 📂 4. Struktur Direktori Proyek
+
+```
+UTS/
+├── core/                           # Modul Logika Inti Sistem Pakar
+│   ├── __init__.py                 # Inisialisasi package core
+│   ├── certainty_factor.py         # Perhitungan rumus Certainty Factor
+│   ├── explanation.py              # Fasilitas penjelasan WHY & HOW
+│   ├── history_manager.py          # Pengelolaan riwayat, filter & statistik
+│   ├── inference_engine.py         # Forward Chaining Inference Engine
+│   ├── knowledge_base.py           # Pengelola Basis Pengetahuan & Validasi
+│   ├── reporter.py                 # Generator laporan PDF (fpdf2) & CSV
+│   └── working_memory.py           # Dynamic Working Memory berbasis OOP
+│
+├── data/                           # Penyimpanan Data & Basis Pengetahuan
+│   ├── consultation_history.json   # Log riwayat sesi konsultasi pengguna
+│   ├── instruments.json            # Ensiklopedia katalog instrumen pasar modal
+│   └── rules.json                  # Basis pengetahuan IF-THEN rules terverifikasi
+│
+├── app.py                          # Antarmuka Web Utama (Streamlit GUI)
+├── demo_cli.py                     # Pengujian Sistem Pakar Mode Terminal (CLI)
+├── requirements.txt                # Daftar pustaka / dependensi Python
+└── README.md                       # Dokumentasi teknis proyek
+```
+
+---
+
+## 🚀 5. Cara Instalasi dan Menjalankan
+
+### Prasyarat
+- Python versi 3.8 atau lebih baru (Disarankan Python 3.10+)
+- Git (untuk manajemen version control)
+
+### Langkah 1: Clone Repository
+```bash
+git clone https://github.com/<username>/investwise-expert-system.git
+cd UTS
+```
+
+### Langkah 2: Buat & Aktifkan Virtual Environment (Opsional tapi Disarankan)
+```bash
+python -m venv venv
+# Untuk Windows:
+.\venv\Scripts\activate
+# Untuk macOS/Linux:
+source venv/bin/activate
+```
+
+### Langkah 3: Install Dependensi
+```bash
+pip install -r requirements.txt
+```
+
+### Langkah 4: Jalankan Aplikasi Web Streamlit
+```bash
+streamlit run app.py
+```
+Aplikasi akan terbuka otomatis di peramban web pada alamat:
+`http://localhost:8501`
+
+### Menjalankan Mode Pengujian Terminal (CLI)
+Jika ingin menguji mesin inferensi secara cepat melalui terminal:
+```bash
+python demo_cli.py
+```
+
+---
+
+## 🧪 6. Contoh Kasus Pengujian (Test Cases)
+
+| No | Kasus Pemodal | Parameter Masukan | Hasil Diagnosa Profil | Rekomendasi Alokasi Portofolio |
+| :---: | :--- | :--- | :---: | :--- |
+| **1** | **Mahasiswa Pemula** | Usia: 21, Pendapatan: Rp 2 jt, Tujuan: Jangka Pendek, Reaksi Pasar: Jual Semua, Pengalaman: Belum Ada, Dana Darurat: Belum Ada | **KONSERVATIF** (CF: 88.8%) | Reksa Dana: 60%, Obligasi: 25%, Emas: 15%, Saham: 0% *(Disertai peringatan dana darurat)* |
+| **2** | **Karyawan Muda** | Usia: 27, Pendapatan: Rp 8 jt, Tujuan: Jangka Panjang, Reaksi Pasar: Tunggu, Pengalaman: Pernah, Dana Darurat: Ada | **MODERAT** (CF: 90.0%) | Reksa Dana: 10%, Obligasi: 25%, Emas: 20%, Saham: 45% |
+| **3** | **Profesional Mapan** | Usia: 35, Pendapatan: Rp 15 jt, Tujuan: Jangka Panjang, Reaksi Pasar: Beli Lagi, Pengalaman: Berpengalaman, Dana Darurat: Ada | **AGRESIF** (CF: 97.3%) | Reksa Dana: 5% (Batas Aman), Obligasi: 15%, Emas: 15%, Saham: 65% |
+
+---
+
+## 📄 7. Lisensi & Penafian (*Disclaimer*)
+Aplikasi ini dikembangkan sebagai karya akademis tugas Praktikum Kecerdasan Buatan. Rekomendasi yang dihasilkan merupakan simulasi pemodelan sistem pakar berbasis heuristik finansial dan tidak menggantikan nasihat perencana keuangan berlisensi resmi.
