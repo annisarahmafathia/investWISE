@@ -1,0 +1,536 @@
+{
+  "metadata": {
+    "domain": "Sistem Pakar Rekomendasi Alokasi Aset Investasi bagi Investor Pemula",
+    "version": "2.0",
+    "developer": "Mahasiswa Teknik Informatika / AI",
+    "description": "Basis pengetahuan sistem pakar berbasis IF-THEN rules dan Certainty Factor untuk penentuan profil risiko serta alokasi portofolio optimal investor pemula."
+  },
+  "questions": [
+    {
+      "id": "usia",
+      "label": "Berapa usia Anda saat ini?",
+      "type": "number",
+      "min": 17,
+      "max": 80,
+      "default": 22,
+      "unit": "Tahun",
+      "why": "Usia menentukan panjangnya horizon waktu investasi. Teori siklus hidup (Lifecycle Investing) menyatakan investor muda memiliki waktu lebih panjang untuk pulih dari volatilitas pasar saham."
+    },
+    {
+      "id": "pendapatan",
+      "label": "Berapa estimasi pendapatan bulanan Anda (Rp)?",
+      "type": "number",
+      "min": 0,
+      "default": 3500000,
+      "unit": "Rupiah",
+      "why": "Besaran pendapatan mencerminkan kapasitas kemampuan finansial menyerap risiko kerugian (Risk Capacity) dan kebutuhan likuiditas tunai sehari-hari."
+    },
+    {
+      "id": "tujuan",
+      "label": "Berapa lama jangka waktu / horizon tujuan investasi Anda?",
+      "type": "choice",
+      "options": {
+        "jangka_pendek": "Jangka Pendek (< 3 Tahun)",
+        "jangka_menengah": "Jangka Menengah (3 - 5 Tahun)",
+        "jangka_panjang": "Jangka Panjang (> 5 Tahun)"
+      },
+      "default": "jangka_panjang",
+      "why": "Horizon investasi menentukan toleransi terhadap fluktuasi harga. Investasi jangka pendek (<3 tahun) wajib difokuskan pada instrumen pasar uang/obligasi agar tidak tergerus saat dana ingin dicairkan."
+    },
+    {
+      "id": "profil_user",
+      "label": "Secara umum, bagaimana Anda menilai profil risiko pribadi Anda?",
+      "type": "choice",
+      "options": {
+        "konservatif": "Konservatif (Menolak risiko, modal harus aman)",
+        "moderat": "Moderat (Siap fluktuasi terukur demi imbal hasil wajar)",
+        "agresif": "Agresif (Mengejar pertumbuhan tinggi, siap fluktuasi besar)"
+      },
+      "default": "moderat",
+      "has_cf": true,
+      "why": "Penilaian subjektif pemodal (Self-Assessment) menjadi hipotesis awal sebelum divalidasi silang dengan perilaku psikologis investor saat menghadapi volatilitas."
+    },
+    {
+      "id": "reaksi_turun",
+      "label": "Jika nilai portofolio Anda tiba-tiba anjlok 20% dalam 1 bulan, apa respon Anda?",
+      "type": "choice",
+      "options": {
+        "jual_semua": "Panik dan segera menjual seluruh aset untuk mengamankan sisa uang (Cut Loss)",
+        "tunggu": "Tetap tenang dan menunggu pasar pulih kembali",
+        "beli_lagi": "Melihatnya sebagai diskon pasar dan membeli lebih banyak (Buy on Dip)"
+      },
+      "default": "tunggu",
+      "has_cf": true,
+      "why": "Reaksi emosional terhadap koreksi harga adalah indikator paling akurat dalam mengukur toleransi risiko riil (Risk Tolerance) menurut Behavioral Finance."
+    },
+    {
+      "id": "pengalaman",
+      "label": "Bagaimana pengalaman Anda dalam instrumen pasar modal (Saham/Reksadana/Kripto)?",
+      "type": "choice",
+      "options": {
+        "belum_ada": "Belum pernah berinvestasi sama sekali (Pemula Total)",
+        "pernah": "Pernah sedikit (Mencoba 1-2 aplikasi/reksadana)",
+        "berpengalaman": "Sudah berpengalaman dan aktif menganalisis pasar"
+      },
+      "default": "belum_ada",
+      "has_cf": true,
+      "why": "Investor pemula belum memiliki ketahanan psikologis menghadapi gejolak pasar ekstrem, sehingga disarankan memulai dari instrumen berisiko rendah."
+    },
+    {
+      "id": "dana_darurat",
+      "label": "Apakah Anda sudah memiliki tabungan dana darurat (3 - 6 bulan pengeluaran)?",
+      "type": "choice",
+      "options": {
+        "ada": "Sudah ada (Tersimpan aman di tabungan/deposito)",
+        "belum": "Belum ada / masih sangat minim"
+      },
+      "default": "ada",
+      "has_cf": false,
+      "why": "Standar perencana keuangan (CFP) mewajibkan tersedianya dana darurat sebelum berinvestasi, untuk mencegah pencairan paksa aset investasi di harga rugi saat ada kebutuhan mendesak."
+    }
+  ],
+  "templates": {
+    "konservatif": {
+      "reksa_dana": 40,
+      "obligasi": 35,
+      "emas": 20,
+      "saham": 5
+    },
+    "moderat": {
+      "reksa_dana": 20,
+      "obligasi": 30,
+      "emas": 20,
+      "saham": 30
+    },
+    "agresif": {
+      "reksa_dana": 10,
+      "obligasi": 15,
+      "emas": 15,
+      "saham": 60
+    }
+  },
+  "min_allocation": {
+    "reksa_dana": 5
+  },
+  "profile_info": {
+    "konservatif": "Fokus utama adalah pelestarian modal dan likuiditas tinggi. Porsi terbesar dialokasikan pada Reksa Dana Pasar Uang dan Obligasi Negara dengan fluktuasi minimal.",
+    "moderat": "Menyeimbangkan antara potensi pertumbuhan modal dan stabilitas nilai investasi. Portofolio terdiversifikasi secara merata antara saham, obligasi, dan aset lindung nilai (emas).",
+    "agresif": "Berorientasi pada apresiasi modal maksimal dalam jangka panjang. Siap menerima volatilitas dan fluktuasi harga yang tinggi dengan porsi ekuitas/saham dominan."
+  },
+  "rules": [
+    {
+      "id": "D1",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "usia",
+          "op": "<=",
+          "value": 30
+        }
+      ],
+      "then": {
+        "fact": "kategori_usia",
+        "value": "muda"
+      },
+      "source": "Bodie, Kane, & Marcus - Lifecycle Investment Theory",
+      "description": "Usia <= 30 tahun diklasifikasikan sebagai fase akumulasi kekayaan usia muda"
+    },
+    {
+      "id": "D2",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "usia",
+          "op": ">=",
+          "value": 31
+        },
+        {
+          "fact": "usia",
+          "op": "<=",
+          "value": 49
+        }
+      ],
+      "then": {
+        "fact": "kategori_usia",
+        "value": "produktif"
+      },
+      "source": "Bodie, Kane, & Marcus - Lifecycle Investment Theory",
+      "description": "Usia 31-49 tahun merupakan usia produktif dengan tanggungan keluarga terstruktur"
+    },
+    {
+      "id": "D3",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "usia",
+          "op": ">=",
+          "value": 50
+        }
+      ],
+      "then": {
+        "fact": "kategori_usia",
+        "value": "senior"
+      },
+      "source": "Bodie, Kane, & Marcus - Lifecycle Investment Theory",
+      "description": "Usia >= 50 tahun mendekati masa pensiun sehingga fokus pada proteksi modal"
+    },
+    {
+      "id": "D4",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "pendapatan",
+          "op": "<",
+          "value": 3000000
+        }
+      ],
+      "then": {
+        "fact": "kategori_pendapatan",
+        "value": "rendah"
+      },
+      "source": "OJK Pedoman Literasi Keuangan Indonesia",
+      "description": "Pendapatan di bawah Rp 3.000.000/bulan masuk kategori kapasitas risiko rendah"
+    },
+    {
+      "id": "D5",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "pendapatan",
+          "op": ">=",
+          "value": 3000000
+        },
+        {
+          "fact": "pendapatan",
+          "op": "<=",
+          "value": 10000000
+        }
+      ],
+      "then": {
+        "fact": "kategori_pendapatan",
+        "value": "menengah"
+      },
+      "source": "OJK Pedoman Literasi Keuangan Indonesia",
+      "description": "Pendapatan Rp 3.000.000 s.d Rp 10.000.000/bulan masuk kapasitas menengah"
+    },
+    {
+      "id": "D6",
+      "type": "derive",
+      "if": [
+        {
+          "fact": "pendapatan",
+          "op": ">",
+          "value": 10000000
+        }
+      ],
+      "then": {
+        "fact": "kategori_pendapatan",
+        "value": "tinggi"
+      },
+      "source": "OJK Pedoman Literasi Keuangan Indonesia",
+      "description": "Pendapatan di atas Rp 10.000.000/bulan memiliki kapasitas risiko tinggi"
+    },
+    {
+      "id": "R1",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "reaksi_turun",
+          "op": "==",
+          "value": "jual_semua"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.85,
+      "source": "Kahneman & Tversky - Behavioral Economics & Loss Aversion",
+      "description": "Perilaku menjual semua aset saat pasar koreksi 20% menunjukkan toleransi risiko sangat rendah (Loss Averse)"
+    },
+    {
+      "id": "R2",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "reaksi_turun",
+          "op": "==",
+          "value": "tunggu"
+        }
+      ],
+      "then": {
+        "hypothesis": "moderat"
+      },
+      "cf": 0.75,
+      "source": "POJK No. 17/POJK.04/2016 Pedoman Profil Risiko Pemodal",
+      "description": "Sikap menunggu pemulihan pasar mencerminkan kesiapan menghadapi volatilitas secara wajar"
+    },
+    {
+      "id": "R3",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "reaksi_turun",
+          "op": "==",
+          "value": "beli_lagi"
+        }
+      ],
+      "then": {
+        "hypothesis": "agresif"
+      },
+      "cf": 0.85,
+      "source": "Warren Buffett Investment Principles / MPT Risk Tolerance",
+      "description": "Sikap membeli lebih banyak saat harga terkoreksi (Buy on Dip) mengindikasikan toleransi risiko tinggi"
+    },
+    {
+      "id": "R4",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "pengalaman",
+          "op": "==",
+          "value": "belum_ada"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.50,
+      "source": "Buku Saku OJK Cerdas Berinvestasi",
+      "description": "Investor tanpa pengalaman sebaiknya memulai dengan strategi konservatif demi edukasi psikologis"
+    },
+    {
+      "id": "R5",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "pengalaman",
+          "op": "==",
+          "value": "berpengalaman"
+        }
+      ],
+      "then": {
+        "hypothesis": "agresif"
+      },
+      "cf": 0.55,
+      "source": "POJK No. 43/POJK.04/2015 Evaluasi Kemampuan Pemodal",
+      "description": "Investor berpengalaman memiliki pemahaman mekanisme pasar sehingga mampu mengelola volatilitas"
+    },
+    {
+      "id": "R6",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "dana_darurat",
+          "op": "==",
+          "value": "belum"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.65,
+      "source": "CFP Board Financial Planning Standards",
+      "description": "Ketiadaan dana darurat membatasi kemampuan menanggung risiko fluktuatif"
+    },
+    {
+      "id": "R7a",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "profil_user",
+          "op": "==",
+          "value": "konservatif"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.60,
+      "source": "Kuesioner Profil Pemodal OJK",
+      "description": "Pernyataan mandiri investor memilih profil konservatif"
+    },
+    {
+      "id": "R7b",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "profil_user",
+          "op": "==",
+          "value": "moderat"
+        }
+      ],
+      "then": {
+        "hypothesis": "moderat"
+      },
+      "cf": 0.60,
+      "source": "Kuesioner Profil Pemodal OJK",
+      "description": "Pernyataan mandiri investor memilih profil moderat"
+    },
+    {
+      "id": "R7c",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "profil_user",
+          "op": "==",
+          "value": "agresif"
+        }
+      ],
+      "then": {
+        "hypothesis": "agresif"
+      },
+      "cf": 0.60,
+      "source": "Kuesioner Profil Pemodal OJK",
+      "description": "Pernyataan mandiri investor memilih profil agresif"
+    },
+    {
+      "id": "R8",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "kategori_usia",
+          "op": "==",
+          "value": "senior"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.55,
+      "source": "Harry Markowitz (1952) Portfolio Selection & Capital Preservation",
+      "description": "Usia senior membutuhkan perlindungan modal pensiun"
+    },
+    {
+      "id": "R9",
+      "type": "profile",
+      "if": [
+        {
+          "fact": "tujuan",
+          "op": "==",
+          "value": "jangka_pendek"
+        }
+      ],
+      "then": {
+        "hypothesis": "konservatif"
+      },
+      "cf": 0.65,
+      "source": "Standar Manajemen Investasi Horizon Waktu",
+      "description": "Tujuan jangka pendek (< 3 tahun) mewajibkan profil konservatif untuk menghindari penarikan saat pasar crash"
+    },
+    {
+      "id": "R10",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "tujuan",
+          "op": "==",
+          "value": "jangka_pendek"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -15,
+          "reksa_dana": 15
+        }
+      },
+      "source": "Modern Portfolio Theory - Asset Liability Matching",
+      "description": "Horizon pendek: Kurangi porsi saham sebesar 15% dan alihkan ke reksa dana pasar uang/likuid"
+    },
+    {
+      "id": "R11",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "tujuan",
+          "op": "==",
+          "value": "jangka_panjang"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": 10,
+          "reksa_dana": -10
+        }
+      },
+      "source": "Jeremy Siegel - Stocks for the Long Run",
+      "description": "Horizon panjang: Tambahkan 10% ke saham karena return saham dalam jangka panjang mengalahkan inflasi"
+    },
+    {
+      "id": "R12",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "kategori_usia",
+          "op": "==",
+          "value": "muda"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": 5,
+          "obligasi": -5
+        }
+      },
+      "source": "Rule of 100/110 Asset Allocation by Age",
+      "description": "Usia muda memiliki kapasitas pertumbuhan: tingkatkan alokasi saham 5%"
+    },
+    {
+      "id": "R13",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "kategori_usia",
+          "op": "==",
+          "value": "senior"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -10,
+          "obligasi": 10
+        }
+      },
+      "source": "Rule of 100/110 Asset Allocation by Age",
+      "description": "Usia senior: Kurangi risiko ekuitas 10% dan perbesar instrumen obligasi pendapatan tetap"
+    },
+    {
+      "id": "R14",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "kategori_pendapatan",
+          "op": "==",
+          "value": "rendah"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -5,
+          "reksa_dana": 5
+        }
+      },
+      "source": "Pedoman Perencana Keuangan Keluarga",
+      "description": "Pendapatan rendah: Perkuat alokasi reksa dana pasar uang untuk menjaga likuiditas mendesak"
+    },
+    {
+      "id": "R15",
+      "type": "adjust",
+      "if": [
+        {
+          "fact": "dana_darurat",
+          "op": "==",
+          "value": "belum"
+        }
+      ],
+      "then": {
+        "adjust": {
+          "saham": -10,
+          "reksa_dana": 10
+        }
+      },
+      "source": "CFP Board Emergency Fund Priority Principle",
+      "description": "Belum ada dana darurat: Alihkan 10% saham ke reksa dana likuid dan tampilkan peringatan dana darurat",
+      "warning": "Prioritas Utama: Segera kumpulkan dana darurat setara 3-6 bulan biaya hidup di instrumen likuid sebelum memperbesar investasi agresif."
+    }
+  ]
+}
