@@ -1,0 +1,726 @@
+[
+  {
+    "id": "KONSUL-20261028-232902-21",
+    "timestamp": "2026-10-28 23:29:02",
+    "user_name": "fawwaz",
+    "profile": "konservatif",
+    "confidence": 0.7375,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 52,
+      "obligasi": 29,
+      "emas": 19,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D4",
+      "R2",
+      "R4",
+      "R6",
+      "R7b",
+      "R12",
+      "R14",
+      "R15"
+    ],
+    "inputs": {
+      "usia": 20,
+      "pendapatan": 500000,
+      "tujuan": "jangka_menengah",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "belum"
+    },
+    "warnings": [
+      "Prioritas Utama: Segera kumpulkan dana darurat setara 3-6 bulan biaya hidup di instrumen likuid sebelum memperbesar investasi agresif."
+    ]
+  },
+  {
+    "id": "KONSUL-20261028-231345-20",
+    "timestamp": "2026-10-28 23:13:45",
+    "user_name": "Investor Muda",
+    "profile": "moderat",
+    "confidence": 0.9,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 10,
+      "obligasi": 25,
+      "emas": 20,
+      "saham": 45
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R2",
+      "R4",
+      "R7b",
+      "R11",
+      "R12"
+    ],
+    "inputs": {
+      "usia": 22,
+      "pendapatan": 3500000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261028-210102-19",
+    "timestamp": "2026-10-28 21:01:02",
+    "user_name": "tak",
+    "profile": "agresif",
+    "confidence": 0.85,
+    "modal": 20000000,
+    "allocation": {
+      "reksa_dana": 25,
+      "obligasi": 10,
+      "emas": 15,
+      "saham": 50
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R3",
+      "R7b",
+      "R9",
+      "R10",
+      "R12"
+    ],
+    "inputs": {
+      "usia": 20,
+      "pendapatan": 6000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "moderat",
+      "reaksi_turun": "beli_lagi",
+      "pengalaman": "pernah",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261028-204130-18",
+    "timestamp": "2026-10-28 20:41:30",
+    "user_name": "Urfan",
+    "profile": "agresif",
+    "confidence": 0.973,
+    "modal": 500000,
+    "allocation": {
+      "reksa_dana": 5,
+      "obligasi": 10,
+      "emas": 15,
+      "saham": 70
+    },
+    "fired_rules": [
+      "D1",
+      "D4",
+      "R3",
+      "R5",
+      "R7c",
+      "R11",
+      "R12",
+      "R14"
+    ],
+    "inputs": {
+      "usia": 20,
+      "pendapatan": 20000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "agresif",
+      "reaksi_turun": "beli_lagi",
+      "pengalaman": "berpengalaman",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261028-204018-17",
+    "timestamp": "2026-10-28 20:40:18",
+    "user_name": "Bos",
+    "profile": "agresif",
+    "confidence": 0.973,
+    "modal": 7000000,
+    "allocation": {
+      "reksa_dana": 5,
+      "obligasi": 15,
+      "emas": 15,
+      "saham": 65
+    },
+    "fired_rules": [
+      "D2",
+      "D5",
+      "R3",
+      "R5",
+      "R7c",
+      "R11"
+    ],
+    "inputs": {
+      "usia": 45,
+      "pendapatan": 3000000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "agresif",
+      "reaksi_turun": "beli_lagi",
+      "pengalaman": "berpengalaman",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261028-203810-16",
+    "timestamp": "2026-10-28 20:38:10",
+    "user_name": "Profesional Muda",
+    "profile": "moderat",
+    "confidence": 0.9,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 15,
+      "obligasi": 30,
+      "emas": 20,
+      "saham": 35
+    },
+    "fired_rules": [
+      "D2",
+      "D4",
+      "R2",
+      "R7b",
+      "R11",
+      "R14"
+    ],
+    "inputs": {
+      "usia": 33,
+      "pendapatan": 2000000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "pernah",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261028-203649-15",
+    "timestamp": "2026-10-28 20:36:49",
+    "user_name": "Karyawan Muda",
+    "profile": "moderat",
+    "confidence": 0.9,
+    "modal": 3000000,
+    "allocation": {
+      "reksa_dana": 25,
+      "obligasi": 25,
+      "emas": 20,
+      "saham": 30
+    },
+    "fired_rules": [
+      "D1",
+      "D4",
+      "R2",
+      "R7b",
+      "R12",
+      "R14"
+    ],
+    "inputs": {
+      "usia": 27,
+      "pendapatan": 1000000,
+      "tujuan": "jangka_menengah",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "pernah",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261028-203536-14",
+    "timestamp": "2026-10-28 20:35:36",
+    "user_name": "Mahasiswa",
+    "profile": "konservatif",
+    "confidence": 0.9936,
+    "modal": 1000000,
+    "allocation": {
+      "reksa_dana": 58,
+      "obligasi": 25,
+      "emas": 17,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D4",
+      "R1",
+      "R4",
+      "R6",
+      "R7a",
+      "R9",
+      "R10",
+      "R12",
+      "R14",
+      "R15"
+    ],
+    "inputs": {
+      "usia": 20,
+      "pendapatan": 200000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "konservatif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "belum"
+    },
+    "warnings": [
+      "Prioritas Utama: Segera kumpulkan dana darurat setara 3-6 bulan biaya hidup di instrumen likuid sebelum memperbesar investasi agresif."
+    ]
+  },
+  {
+    "id": "KONSUL-20261028-203322-13",
+    "timestamp": "2026-10-28 20:33:22",
+    "user_name": "Mahasiswa",
+    "profile": "konservatif",
+    "confidence": 0.9895,
+    "modal": 1000000,
+    "allocation": {
+      "reksa_dana": 55,
+      "obligasi": 27,
+      "emas": 18,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D4",
+      "R1",
+      "R4",
+      "R7a",
+      "R9",
+      "R10",
+      "R12",
+      "R14"
+    ],
+    "inputs": {
+      "usia": 20,
+      "pendapatan": 500000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "konservatif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-162128-12",
+    "timestamp": "2026-10-27 16:21:28",
+    "user_name": "Investor Muda",
+    "profile": "konservatif",
+    "confidence": 0.9816,
+    "modal": 100000,
+    "allocation": {
+      "reksa_dana": 57,
+      "obligasi": 26,
+      "emas": 17,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R1",
+      "R6",
+      "R7c",
+      "R9",
+      "R10",
+      "R12",
+      "R15"
+    ],
+    "inputs": {
+      "usia": 22,
+      "pendapatan": 10000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "agresif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "pernah",
+      "dana_darurat": "belum"
+    },
+    "warnings": [
+      "Prioritas Utama: Segera kumpulkan dana darurat setara 3-6 bulan biaya hidup di instrumen likuid sebelum memperbesar investasi agresif."
+    ]
+  },
+  {
+    "id": "KONSUL-20261027-162126-11",
+    "timestamp": "2026-10-27 16:21:26",
+    "user_name": "Investor Muda",
+    "profile": "konservatif",
+    "confidence": 0.9816,
+    "modal": 100000,
+    "allocation": {
+      "reksa_dana": 57,
+      "obligasi": 26,
+      "emas": 17,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R1",
+      "R6",
+      "R7c",
+      "R9",
+      "R10",
+      "R12",
+      "R15"
+    ],
+    "inputs": {
+      "usia": 22,
+      "pendapatan": 10000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "agresif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "pernah",
+      "dana_darurat": "belum"
+    },
+    "warnings": [
+      "Prioritas Utama: Segera kumpulkan dana darurat setara 3-6 bulan biaya hidup di instrumen likuid sebelum memperbesar investasi agresif."
+    ]
+  },
+  {
+    "id": "KONSUL-20261027-161607-10",
+    "timestamp": "2026-10-27 16:16:07",
+    "user_name": "riyad",
+    "profile": "konservatif",
+    "confidence": 0.9755,
+    "modal": 1000000,
+    "allocation": {
+      "reksa_dana": 57,
+      "obligasi": 26,
+      "emas": 17,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R3",
+      "R4",
+      "R6",
+      "R7a",
+      "R9",
+      "R10",
+      "R12",
+      "R15"
+    ],
+    "inputs": {
+      "usia": 22,
+      "pendapatan": 10000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "konservatif",
+      "reaksi_turun": "beli_lagi",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "belum"
+    },
+    "warnings": [
+      "Prioritas Utama: Segera kumpulkan dana darurat setara 3-6 bulan biaya hidup di instrumen likuid sebelum memperbesar investasi agresif."
+    ]
+  },
+  {
+    "id": "KONSUL-20261027-160822-9",
+    "timestamp": "2026-10-27 16:08:22",
+    "user_name": "Investor Muda",
+    "profile": "konservatif",
+    "confidence": 0.979,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 52,
+      "obligasi": 29,
+      "emas": 19,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R1",
+      "R7a",
+      "R9",
+      "R10",
+      "R12"
+    ],
+    "inputs": {
+      "usia": 30,
+      "pendapatan": 10000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "konservatif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "pernah",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-160709-8",
+    "timestamp": "2026-10-27 16:07:09",
+    "user_name": "Investor Muda",
+    "profile": "konservatif",
+    "confidence": 0.9906,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 46,
+      "obligasi": 37,
+      "emas": 17,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D3",
+      "D6",
+      "R1",
+      "R5",
+      "R7a",
+      "R8",
+      "R9",
+      "R10",
+      "R13"
+    ],
+    "inputs": {
+      "usia": 60,
+      "pendapatan": 100000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "konservatif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "berpengalaman",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-160708-7",
+    "timestamp": "2026-10-27 16:07:08",
+    "user_name": "Investor Muda",
+    "profile": "konservatif",
+    "confidence": 0.9906,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 46,
+      "obligasi": 37,
+      "emas": 17,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D3",
+      "D6",
+      "R1",
+      "R5",
+      "R7a",
+      "R8",
+      "R9",
+      "R10",
+      "R13"
+    ],
+    "inputs": {
+      "usia": 60,
+      "pendapatan": 100000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "konservatif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "berpengalaman",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-213426-6",
+    "timestamp": "2026-10-27 21:34:26",
+    "user_name": "Investor Muda",
+    "profile": "moderat",
+    "confidence": 0.9,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 10,
+      "obligasi": 25,
+      "emas": 20,
+      "saham": 45
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R2",
+      "R4",
+      "R7b",
+      "R11",
+      "R12"
+    ],
+    "inputs": {
+      "usia": 22,
+      "pendapatan": 3500000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-213138-5",
+    "timestamp": "2026-10-27 21:31:38",
+    "user_name": "Investor Muda",
+    "profile": "moderat",
+    "confidence": 0.9,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 10,
+      "obligasi": 25,
+      "emas": 20,
+      "saham": 45
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R2",
+      "R4",
+      "R7b",
+      "R11",
+      "R12"
+    ],
+    "inputs": {
+      "usia": 17,
+      "pendapatan": 3500000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-212745-4",
+    "timestamp": "2026-10-27 21:27:45",
+    "user_name": "Investor Muda",
+    "profile": "moderat",
+    "confidence": 0.9,
+    "modal": 5000000,
+    "allocation": {
+      "reksa_dana": 10,
+      "obligasi": 25,
+      "emas": 20,
+      "saham": 45
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R2",
+      "R4",
+      "R7b",
+      "R11",
+      "R12"
+    ],
+    "inputs": {
+      "usia": 22,
+      "pendapatan": 3500000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-142010-1",
+    "timestamp": "2026-10-27 14:20:10",
+    "user_name": "Rian (Mahasiswa Baru)",
+    "profile": "konservatif",
+    "confidence": 0.8875,
+    "modal": 1500000,
+    "allocation": {
+      "reksa_dana": 60,
+      "obligasi": 25,
+      "emas": 15,
+      "saham": 0
+    },
+    "fired_rules": [
+      "D1",
+      "D4",
+      "R1",
+      "R4",
+      "R6",
+      "R7a",
+      "R9",
+      "R10",
+      "R12",
+      "R14",
+      "R15"
+    ],
+    "inputs": {
+      "usia": 21,
+      "pendapatan": 2000000,
+      "tujuan": "jangka_pendek",
+      "profil_user": "konservatif",
+      "reaksi_turun": "jual_semua",
+      "pengalaman": "belum_ada",
+      "dana_darurat": "belum"
+    },
+    "warnings": [
+      "Prioritas Utama: Segera kumpulkan dana darurat setara 3-6 bulan biaya hidup di instrumen likuid sebelum memperbesar investasi agresif."
+    ]
+  },
+  {
+    "id": "KONSUL-20261027-151025-2",
+    "timestamp": "2026-10-27 15:10:25",
+    "user_name": "Siti (Karyawan Swasta)",
+    "profile": "moderat",
+    "confidence": 0.865,
+    "modal": 10000000,
+    "allocation": {
+      "reksa_dana": 20,
+      "obligasi": 25,
+      "emas": 20,
+      "saham": 35
+    },
+    "fired_rules": [
+      "D1",
+      "D5",
+      "R2",
+      "R7b",
+      "R11",
+      "R12"
+    ],
+    "inputs": {
+      "usia": 27,
+      "pendapatan": 8000000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "moderat",
+      "reaksi_turun": "tunggu",
+      "pengalaman": "pernah",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  },
+  {
+    "id": "KONSUL-20261027-160540-3",
+    "timestamp": "2026-10-27 16:05:40",
+    "user_name": "Budi (Pekerja Mapan)",
+    "profile": "agresif",
+    "confidence": 0.942,
+    "modal": 25000000,
+    "allocation": {
+      "reksa_dana": 5,
+      "obligasi": 15,
+      "emas": 10,
+      "saham": 70
+    },
+    "fired_rules": [
+      "D2",
+      "D6",
+      "R3",
+      "R5",
+      "R7c",
+      "R11"
+    ],
+    "inputs": {
+      "usia": 35,
+      "pendapatan": 15000000,
+      "tujuan": "jangka_panjang",
+      "profil_user": "agresif",
+      "reaksi_turun": "beli_lagi",
+      "pengalaman": "berpengalaman",
+      "dana_darurat": "ada"
+    },
+    "warnings": []
+  }
+]
