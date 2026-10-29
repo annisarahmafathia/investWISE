@@ -1,0 +1,88 @@
+[
+  {
+    "id": "reksa_dana",
+    "name": "Reksa Dana (Pasar Uang & Pendapatan Tetap)",
+    "category": "Likuiditas & Pendapatan Rendah Risiko",
+    "risk_level": "Rendah hingga Sedang",
+    "expected_return": "4% - 7% per tahun",
+    "liquidity": "Sangat Tinggi (T+1 s.d T+3)",
+    "min_investment": "Mulai dari Rp 10.000",
+    "suitability": "Cocok untuk investor pemula, tabungan dana darurat, dan tujuan keuangan jangka pendek (< 3 tahun).",
+    "description": "Wadah yang menghimpun dana dari masyarakat pemodal untuk diinvestasikan dalam portofolio efek oleh Manajer Investasi (MI) profesional yang berizin OJK. Reksa Dana Pasar Uang (RDPU) menempatkan dana pada deposito perbankan dan obligasi berjatuh tempo di bawah 1 tahun.",
+    "advantages": [
+      "Dikelola secara profesional oleh Manajer Investasi berizin OJK",
+      "Diversifikasi otomatis meski modal awal kecil (Rp 10.000)",
+      "Bukan objek pajak penghasilan (PPh)",
+      "Tingkat likuiditas tinggi dan risiko fluktuasi modal sangat minim"
+    ],
+    "disadvantages": [
+      "Potensi keuntungan terbatas dibandingkan saham di masa bullish",
+      "Kinerja bergantung pada keahlian Manajer Investasi"
+    ]
+  },
+  {
+    "id": "obligasi",
+    "name": "Obligasi / SBN (Surat Berharga Negara)",
+    "category": "Pendapatan Tetap (Fixed Income)",
+    "risk_level": "Rendah hingga Sedang",
+    "expected_return": "6% - 8% per tahun (Kupon)",
+    "liquidity": "Sedang (Pasar Sekunder / Masa Penawaran)",
+    "min_investment": "Mulai dari Rp 1.000.000",
+    "suitability": "Cocok untuk investor profil konservatif-moderat dengan tujuan jangka menengah (3 - 5 tahun) yang menginginkan pendapatan pasif rutin.",
+    "description": "Surat utang yang diterbitkan oleh Pemerintah Republik Indonesia (ORI, SR, SBR, ST) atau Korporasi kepada pemodal. Pemerintah menjamin 100% pengembalian pokok dan kupon melalui Undang-Undang APBN.",
+    "advantages": [
+      "Dijamin 100% oleh negara tanpa batas maksimal (SBN)",
+      "Mendapatkan kupon berkala yang ditransfer otomatis ke rekening tiap bulan",
+      "Pajak kupon obligasi hanya 10% (lebih rendah dari pajak bunga deposito 20%)",
+      "Dapat diperdagangkan di pasar sekunder sebelum jatuh tempo (tipe tradable)"
+    ],
+    "disadvantages": [
+      "Ada periode lock-up atau batasan pencairan lebih awal (early redemption)",
+      "Risiko fluktuasi harga jika dijual sebelum jatuh tempo di pasar sekunder"
+    ]
+  },
+  {
+    "id": "emas",
+    "name": "Emas Logam Mulia / Emas Digital",
+    "category": "Aset Lindung Nilai (Hedging & Safe Haven)",
+    "risk_level": "Sedang",
+    "expected_return": "7% - 11% per tahun (Historis jangka panjang)",
+    "liquidity": "Tinggi (Toko emas / Buyback platform digital)",
+    "min_investment": "Mulai dari 0.01 gram (Rp 15.000)",
+    "suitability": "Cocok untuk diversifikasi perlindungan nilai kekayaan dari inflasi jangka menengah hingga panjang (> 5 tahun).",
+    "description": "Komoditas fisik bernilai intrinsik tinggi yang terbukti tangguh sebagai safe-haven saat terjadi krisis geopolitik, lonjakan inflasi, atau depresiasi nilai tukar mata uang fiat.",
+    "advantages": [
+      "Nilai intrinsik tidak bisa nol (tidak ada risiko pailit)",
+      "Aset lindung nilai (hedge) terbaik terhadap inflasi tinggi dan devaluasi rupiah",
+      "Tersedia pilihan emas fisik (ANTAM/UBS) maupun emas tabungan digital terdaftar BAPPEBTI",
+      "Diterima secara universal di seluruh dunia"
+    ],
+    "disadvantages": [
+      "Tidak menghasilkan arus kas berkala (tanpa dividen atau bunga)",
+      "Terdapat selisih harga jual dan harga beli (spread) saat buyback",
+      "Emas fisik memerlukan biaya penyimpanan aman (safety deposit box)"
+    ]
+  },
+  {
+    "id": "saham",
+    "name": "Saham (Indeks LQ45 / Saham Bluechip)",
+    "category": "Ekuitas & Apresiasi Modal (Capital Growth)",
+    "risk_level": "Tinggi",
+    "expected_return": "10% - 18%+ per tahun (Tergantung kinerja emiten)",
+    "liquidity": "Sangat Tinggi (Jam bursa BEI, T+2 settlement)",
+    "min_investment": "1 Lot (100 lembar) mulai dari Rp 100.000",
+    "suitability": "Cocok untuk investor profil agresif, usia muda, dan tujuan keuangan jangka panjang (> 5 tahun).",
+    "description": "Bukti kepemilikan modal atas suatu perusahaan terbuka (PT Tbk) yang tercatat di Bursa Efek Indonesia (BEI). Pemegang saham berhak atas dividen dan keuntungan kenaikan harga saham (capital gain).",
+    "advantages": [
+      "Potensi imbal hasil tertinggi yang secara historis mengalahkan inflasi jangka panjang",
+      "Mendapatkan dividen tahunan dari laba bersih operasional perusahaan",
+      "Kepemilikan riil atas emiten-emiten terkemuka Indonesia",
+      "Likuiditas sangat cepat selama jam bursa berlangsung"
+    ],
+    "disadvantages": [
+      "Volatilitas harga harian sangat dinamis dipengaruhi sentimen pasar",
+      "Risiko kehilangan sebagian modal investasi jika terjadi penurunan harga saham (capital loss)",
+      "Membutuhkan literasi analisis fundamental dan teknikal yang memadai"
+    ]
+  }
+]
